@@ -1,0 +1,15 @@
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\question-10.GeneratedMSBuildEditorConfig.editorconfig
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\question-10.AssemblyInfoInputs.cache
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\question-10.AssemblyInfo.cs
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\question-10.csproj.CoreCompileInputs.cache
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\question-10.sourcelink.json
+C:\Leetcode-Questions\question-10\bin\Debug\net8.0\question-10.exe
+C:\Leetcode-Questions\question-10\bin\Debug\net8.0\question-10.deps.json
+C:\Leetcode-Questions\question-10\bin\Debug\net8.0\question-10.runtimeconfig.json
+C:\Leetcode-Questions\question-10\bin\Debug\net8.0\question-10.dll
+C:\Leetcode-Questions\question-10\bin\Debug\net8.0\question-10.pdb
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\question-10.dll
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\refint\question-10.dll
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\question-10.pdb
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\question-10.genruntimeconfig.cache
+C:\Leetcode-Questions\question-10\obj\Debug\net8.0\ref\question-10.dll
