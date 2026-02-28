@@ -11,7 +11,7 @@
             copy = copy.next;
             length++;
         }
-        if (k == 0)
+        if (length == 0)
             return null;
         int elementsToSkip = length - k % length - 1;
         copy = head;
