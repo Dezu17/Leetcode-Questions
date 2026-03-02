@@ -28,6 +28,7 @@ public class App {
         }
         List<List<String>> result = new ArrayList<>();
         for (String key : groups.keySet())
+
             result.add(groups.get(key));
         return result;
     }
