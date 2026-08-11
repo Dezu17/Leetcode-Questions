@@ -2,30 +2,48 @@ import java.util.List;
 
 public class App {
 
-    public static ListNode createList(ListNode l1, ListNode l2, int carry) {
-        if (l1 != null && l2 != null) {
-            ListNode nextListNode = createList(l1.next, l2.next, (l1.val + l2.val + carry) / 10);
-            return new ListNode((l1.val + l2.val + carry) % 10, nextListNode);
-        } else if (l1 != null) {
-            ListNode nextListNode = createList(l1.next, null, (l1.val + carry) / 10);
-            return new ListNode((l1.val + carry) % 10, nextListNode);
-        } else if (l2 != null) {
-            ListNode nextListNode = createList(null, l2.next, (l2.val + carry) / 10);
-            return new ListNode((l2.val + carry) % 10, nextListNode);
-        } else if (carry > 0) {
-            return new ListNode(carry);
-        } else
-            return null;
+    private static ListNode performAddition(ListNode l1, ListNode l2) {
+        ListNode head = null, previous = null;
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            ListNode currentNode = new ListNode();
+            if (l1 != null && l2 != null) {
+                currentNode.val = (l1.val + l2.val + carry) % 10;
+                carry = (l1.val + l2.val + carry) / 10;
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+            else if (l1 != null) {
+                currentNode.val = (l1.val + carry) % 10;
+                carry = (l1.val + carry) / 10;
+                l1 = l1.next;
+            }
+            else {
+                currentNode.val = (l2.val + carry) % 10;
+                carry = (l2.val + carry) / 10;
+                l2 = l2.next;
+            }
+            if (head == null) {
+                head = currentNode;
+                previous = currentNode;
+            }
+            else {
+                previous.next = currentNode;
+                previous = currentNode;
+            }
+        }
+        if (carry != 0)
+            previous.next = new ListNode(carry);
+        return head;
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        return createList(l1, l2, 0);
+        return performAddition(l1, l2);
     }
 
     public static void main(String[] args) throws Exception {
-        ListNode l1 = new ListNode(9,
-                new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))));
-        ListNode l2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
+        ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
+        ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
         ListNode result = addTwoNumbers(l1, l2);
         while (result != null) {
             System.out.print(result.val + " ");

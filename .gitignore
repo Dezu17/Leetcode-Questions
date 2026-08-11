@@ -1,0 +1,9 @@
+# Ignore Java compilation outputs
+**/bin/
+**/obj/
+**/out/
+**/target/
+
+# Ignore IDE and editor metadata
+.vscode/
+*.class
