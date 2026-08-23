@@ -1,30 +1,38 @@
 import java.util.Stack;
 
 public class App {
+    private static boolean isOpenBracket(char character) {
+        if (character == '(' || character == '[' || character == '{')
+            return true;
+        return false;
+    }
+    private static boolean isValidPair(char first, char second) {
+        if (first == '(' && second == ')')
+            return true;
+        if (first == '[' && second == ']')
+            return true;
+        if (first == '{' && second == '}')
+            return true;
+        return false;
+    }
     public static boolean isValid(String s) {
-        if (s.length() < 2)
-            return false;
-        Stack<Character> brackets =  new Stack<>();
-        for (int index = 0; index < s.length(); index++) {
-            char current = s.charAt(index);
-            if (current == '(' || current == '[' || current == '{')
-                brackets.push(current);
-            else if (!brackets.empty()) {
+        Stack<Character> brackets = new Stack<>();
+        for (int index = 0; index < s.length(); index++)
+            if (isOpenBracket(s.charAt(index)))
+                brackets.push(s.charAt(index));
+            else if (!brackets.isEmpty()) {
                 char popped = brackets.pop();
-                if (current == ')' && popped != '(')
-                    return false;
-                else if (current == ']' && popped != '[')
-                    return false;
-                else if (current == '}' && popped != '{')
+                if (!isValidPair(popped, s.charAt(index)))
                     return false;
             }
-        }
-        if (!brackets.empty())
+            else
+                return false;
+        if (!brackets.isEmpty())
             return false;
         return true;
     }
     public static void main(String[] args) {
-        String s = "]";
+        String s = "{}}";
         System.out.print("Result: " + isValid(s));
     }
 }
