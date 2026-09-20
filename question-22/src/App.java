@@ -1,55 +1,47 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class App {
-    public static List<String> result;
-
-    private static boolean isValid(String s, int n) {
-        if (s.length() <= n * 2)
-            return true;
-        return false;
-    }
-
-    private static boolean isSolution(String s, int n) {
-        if (s.length() != n * 2)
-            return false;
-        Stack<Character> parentheses = new Stack<>();
-        for (int index = 0; index < n * 2; index++) {
-            if (s.charAt(index) == ')') {
-                if (!parentheses.isEmpty())
-                    parentheses.pop();
+    private static void backtrack(int n, List<String> result, StringBuilder pair, int left, int right) {
+        for (int current = 0; current < 2; current++) {
+            if (current == 0) {
+                left++;
+                pair.append('(');
+            }
+            else {
+                right++;
+                pair.append(')');
+            }
+            if (left >= right && left + right <= 2 * n)
+                if (left == right && left + right == 2 * n)
+                    result.add(pair.toString());
                 else
-                    return false;
-            } else
-                parentheses.push('(');
+                    backtrack(n, result, pair, left, right);
+            pair.deleteCharAt(pair.length() - 1);
+            if (current == 0)
+                left--;
+            else
+                right--;
         }
-        if (parentheses.isEmpty())
-            return true;
-        return false;
-    }
-
-    private static List<String> createList(int n, String currentString) {
-        String options = "()", copy = currentString;
-        for (int index = 0; index < options.length(); index++) {
-            currentString += options.charAt(index);
-            if (isValid(currentString, n))
-                if (isSolution(currentString, n))
-                    result.add(currentString);
-                else
-                    createList(n, currentString);
-            currentString = copy;
-        }
-        return result;
     }
 
     public static List<String> generateParenthesis(int n) {
-        result = new ArrayList<String>();
-        return createList(n, "");
+        List<String> result = new ArrayList<>();
+        backtrack(n, result, new StringBuilder(), 0, 0);
+        return result;
+    }
+
+    private static void testGenerateParenthesis(int n, List<String> expected) {
+        List<String> actual = generateParenthesis(n);
+        if (!actual.equals(expected))
+            throw new AssertionError("n = " + n + ": expected " + expected + ", got " + actual);
+        System.out.println("Passed: n = " + n);
     }
 
     public static void main(String[] args) {
-        int n = 3;
-        List<String> results = generateParenthesis(n);
-        for (int index = 0; index < results.size(); index++)
-            System.out.println(result.get(index));
+        testGenerateParenthesis(1, Arrays.asList("()"));
+        testGenerateParenthesis(3, Arrays.asList(
+                "((()))", "(()())", "(())()", "()(())", "()()()"));
     }
 }
