@@ -1,38 +1,28 @@
 public class App {
     public static String longestPalindrome(String s) {
-        int maxLength = 0;
-        String longestPalindrome = "";
-        for (int index = 0; index < s.length(); index++) {
-            int left = index;
-            int right = index + 1;
-            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-                left--;
-                right++;
+        if (s.length() == 1)
+            return s;
+        int maxLength = 1, maxStartIndex = 0;
+        for (int start = 0; start < s.length(); start++)
+            for (int end = start + 1; end < s.length(); end++) {
+                int left = start, right = end;
+                boolean isPalindrome = true;
+                while (left < right && isPalindrome) {
+                    if (s.charAt(left) != s.charAt(right))
+                        isPalindrome = false;
+                    left++;
+                    right--;
+                }
+                if (isPalindrome && maxLength < end - start + 1) {
+                    maxLength = end - start + 1;
+                    maxStartIndex = start;
+                }
             }
-            left++;
-            right--;
-            if (right - left + 1 > maxLength) {
-                maxLength = right - left + 1;
-                longestPalindrome = s.substring(left, right + 1);
-            }
-            left = index - 1;
-            right = index + 1;
-            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-                left--;
-                right++;
-            }
-            left++;
-            right--;
-            if (right - left + 1 > maxLength) {
-                maxLength = right - left + 1;
-                longestPalindrome = s.substring(left, right + 1);
-            }
-        }
-        return longestPalindrome;
+        return s.substring(maxStartIndex, maxStartIndex + maxLength);
     }
 
     public static void main(String[] args) {
-        String s = "bababd";
+        String s = "cbbd";
         System.out.print("Result: " + longestPalindrome(s));
     }
 }
