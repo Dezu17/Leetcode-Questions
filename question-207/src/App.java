@@ -9,7 +9,9 @@ public class App {
     boolean[] visited;
 
     private boolean checkNoCycle(int node, Set<Integer> path) {
-        if (visited[node] == true && path.contains(node))
+        if (visited[node] && !path.contains(node))
+        return true;
+        if (visited[node] && path.contains(node))
             return false;
         visited[node] = true;
         path.add(node);
@@ -31,7 +33,7 @@ public class App {
         for (int index = 0; index < prerequisites.length; index++)
             adjacencyList.get(prerequisites[index][0]).add(prerequisites[index][1]);
         for (int index = 0; index < visited.length; index++)
-            if (visited[index] == false)
+            if (!visited[index])
                 if (!checkNoCycle(index, new HashSet<>()))
                     return false;
         return true;
